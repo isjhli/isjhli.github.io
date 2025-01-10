@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="738.单调递增的数字 题目链接：704. 二分查找 文档讲解：代码随想录 视频讲解：贪心算法，思路不难想，但代码不好写！LeetCode:738.单调自增的数字  思路数要尽可能的大，高位开始尽量不变，从低位开始找到不满足递减的第一个位置，当前位置减1，后面的全都变成9即可。 代码1234567891011121314class Solution &#123;public:    int mon">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树">
+<meta property="og:url" content="http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/index.html">
+<meta property="og:site_name" content="Coco">
+<meta property="og:description" content="738.单调递增的数字 题目链接：704. 二分查找 文档讲解：代码随想录 视频讲解：贪心算法，思路不难想，但代码不好写！LeetCode:738.单调自增的数字  思路数要尽可能的大，高位开始尽量不变，从低位开始找到不满足递减的第一个位置，当前位置减1，后面的全都变成9即可。 代码1234567891011121314class Solution &#123;public:    int mon">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-24T16:00:00.000Z">
+<meta property="article:author" content="Coco">
+<meta property="article:tag" content="代码随想录训练营">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWLT1247RV"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DWLT1247RV');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%85%AD%E5%A4%A9_435.%20%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4%EF%BC%8C763.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4%EF%BC%8C56.%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/04/23/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%9B%9B%E5%A4%A9_1005.K%E6%AC%A1%E5%8F%96%E5%8F%8D%E5%90%8E%E6%9C%80%E5%A4%A7%E5%8C%96%E7%9A%84%E6%95%B0%E7%BB%84%E5%92%8C%EF%BC%8C134.%20%E5%8A%A0%E6%B2%B9%E7%AB%99%EF%BC%8C135.%20%E5%88%86%E5%8F%91%E7%B3%96%E6%9E%9C/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&text=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&title=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&is_video=false&description=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树&body=Check out this article: http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&title=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&title=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&title=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&title=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&name=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&t=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#738-%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97"><span class="toc-number">1.</span> <span class="toc-text">738.单调递增的数字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#968-%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">2.</span> <span class="toc-text">968.监控二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Coco</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-04-24T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-04-25</time>
+        
+        (Updated: <time datetime="2024-04-24T16:00:00.000Z" class="dt-updated" itemprop="dateModified">2024-04-25</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">代码随想录训练营</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="738-单调递增的数字"><a href="#738-单调递增的数字" class="headerlink" title="738.单调递增的数字"></a>738.单调递增的数字</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/monotone-increasing-digits/">704. 二分查找</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Kv4y1x7tP/">贪心算法，思路不难想，但代码不好写！LeetCode:738.单调自增的数字</a></p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>数要尽可能的大，高位开始尽量不变，从低位开始找到不满足递减的第一个位置，当前位置减1，后面的全都变成9即可。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">monotoneIncreasingDigits</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        string strNum = <span class="built_in">to_string</span>(n);</span><br><span class="line">        <span class="type">int</span> idx;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = strNum.<span class="built_in">size</span>() - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (strNum[i - <span class="number">1</span>] &gt; strNum[i]) &#123;</span><br><span class="line">                strNum[i] = <span class="string">&#x27;9&#x27;</span>;</span><br><span class="line">                strNum[i - <span class="number">1</span>]--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">stoi</span>(strNum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="968-监控二叉树"><a href="#968-监控二叉树" class="headerlink" title="968.监控二叉树"></a>968.监控二叉树</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-cameras/description/">968.监控二叉树</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1SA411U75i/">贪心算法，二叉树与贪心的结合，有点难…… LeetCode:968.监督二叉树</a></p>
+</blockquote>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>很容易想到要从叶子结点的父节点开始每隔两个结点放一个摄像头为局部最优，但是怎样表示一个结点的状态（有摄像头，没有摄像头但被摄像头覆盖，没有摄像头也没有被摄像头覆盖）是个难点。</p>
+<p>后序遍历递归返回值选择<code>int</code>型，返回<code>0</code>、<code>1</code>、<code>2</code>，其中<code>0</code>表示没有摄像头也没有被摄像头覆盖，<code>1</code>表示有摄像头，<code>2</code>表示没有摄像头但被摄像头覆盖。</p>
+<p>空结点处理：</p>
+<ul>
+<li>如果空结点是未被覆盖状态，这时叶子结点就需要放摄像头，不是局部最优；</li>
+<li>如果空结点是有摄像头状态，这时叶子结点被覆盖，叶子结点的父节点不用放置摄像头，而父节点的父节点放置摄像头，这时叶子结点没有被覆盖；</li>
+<li>如果空结点是被覆盖状态，则叶子结点不用放置摄像头，叶子结点的父节点放置摄像头即可，是局部最优。</li>
+</ul>
+<p>分四种情况：</p>
+<ul>
+<li>情况一：左右结点都有覆盖，这时当前结点不用放置摄像头，当前节点的父结点放置摄像头，返回<code>0</code></li>
+<li>情况二：左右结点至少有一个未被覆盖，这时当前结点需要放置摄像头，返回<code>1</code></li>
+<li>情况三：左右结点至少有一个摄像头，且另一个结点被覆盖，这时当前结点不需要放置摄像头，且被左右结点覆盖，返回<code>2</code>；</li>
+<li>情况四：如果递归完后，根结点没有被覆盖，则根结点也需要放置一个摄像头</li>
+</ul>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minCameraCover</span><span class="params">(TreeNode *root)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 情况4</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">traversal</span>(root) == <span class="number">0</span>)</span><br><span class="line">            <span class="comment">// root无覆盖</span></span><br><span class="line">            result++;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">traversal</span><span class="params">(TreeNode *node)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 空结点，该结点有覆盖</span></span><br><span class="line">        <span class="keyword">if</span> (node == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> left = <span class="built_in">traversal</span>(node-&gt;left);</span><br><span class="line">        <span class="type">int</span> right = <span class="built_in">traversal</span>(node-&gt;right);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 情况1</span></span><br><span class="line">        <span class="comment">// 左右结点都有覆盖，则该节点放置摄像头</span></span><br><span class="line">        <span class="keyword">if</span> (left == <span class="number">2</span> &amp;&amp; right == <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 情况2</span></span><br><span class="line">        <span class="comment">// 左右结点至少有一个没有覆盖</span></span><br><span class="line">        <span class="comment">// left == 0 &amp;&amp; right == 0 左右节点无覆盖</span></span><br><span class="line">        <span class="comment">// left == 1 &amp;&amp; right == 0 左节点有摄像头，右节点无覆盖</span></span><br><span class="line">        <span class="comment">// left == 0 &amp;&amp; right == 1 左节点有无覆盖，右节点摄像头</span></span><br><span class="line">        <span class="comment">// left == 0 &amp;&amp; right == 2 左节点无覆盖，右节点覆盖</span></span><br><span class="line">        <span class="comment">// left == 2 &amp;&amp; right == 0 左节点覆盖，右节点无覆盖</span></span><br><span class="line">        <span class="keyword">if</span> (left == <span class="number">0</span> || right == <span class="number">0</span>) &#123;</span><br><span class="line">            result++;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 情况3</span></span><br><span class="line">        <span class="comment">// left == 1 &amp;&amp; right == 2 左节点有摄像头，右节点有覆盖</span></span><br><span class="line">        <span class="comment">// left == 2 &amp;&amp; right == 1 左节点有覆盖，右节点有摄像头</span></span><br><span class="line">        <span class="comment">// left == 1 &amp;&amp; right == 1 左右节点都有摄像头</span></span><br><span class="line">        <span class="comment">// 其他情况前段代码均已覆盖</span></span><br><span class="line">        <span class="keyword">if</span> (left == <span class="number">1</span> || right == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#738-%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97"><span class="toc-number">1.</span> <span class="toc-text">738.单调递增的数字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#968-%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">2.</span> <span class="toc-text">968.监控二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&text=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&title=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&is_video=false&description=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树&body=Check out this article: http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&title=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&title=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&title=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&title=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&name=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/04/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%A4%A9_738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%8C968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/&t=代码随想录算法训练营第三十七天_738.单调递增的数字，968.监控二叉树"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Coco
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b627cd33d553ee364518086133d85cf0";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

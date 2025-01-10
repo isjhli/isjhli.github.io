@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="39. 组合总和 题目链接：39. 组合总和 文档讲解：代码随想录 视频讲解：带你学透回溯算法-组合总和（对应「leetcode」力扣题目：39.组合总和）| 回溯法精讲！  思路与77.组合问题类似，只需定义一个全局变量sum记录当前路径的和，sum等于target时，将该路径添加至结果数组。 剪枝：对数组进行排序，然后使用回溯算法，当sum大于target时，结束当次循环。 代码1234567">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串">
+<meta property="og:url" content="http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/index.html">
+<meta property="og:site_name" content="Coco">
+<meta property="og:description" content="39. 组合总和 题目链接：39. 组合总和 文档讲解：代码随想录 视频讲解：带你学透回溯算法-组合总和（对应「leetcode」力扣题目：39.组合总和）| 回溯法精讲！  思路与77.组合问题类似，只需定义一个全局变量sum记录当前路径的和，sum等于target时，将该路径添加至结果数组。 剪枝：对数组进行排序，然后使用回溯算法，当sum大于target时，结束当次循环。 代码1234567">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-14T16:00:00.000Z">
+<meta property="article:author" content="Coco">
+<meta property="article:tag" content="代码随想录训练营">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWLT1247RV"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DWLT1247RV');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/04/17/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%A4%A9_93.%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80%EF%BC%8C78.%E5%AD%90%E9%9B%86%EF%BC%8C90.%E5%AD%90%E9%9B%86II/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/04/14/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%A4%A9_216.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CIII%EF%BC%8C17.%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&text=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&title=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&is_video=false&description=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串&body=Check out this article: http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&title=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&title=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&title=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&title=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&name=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&t=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#39-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C"><span class="toc-number">1.</span> <span class="toc-text">39. 组合总和</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#40-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII"><span class="toc-number">2.</span> <span class="toc-text">40.组合总和II</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">131.分割回文串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">3.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Coco</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-04-14T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-04-15</time>
+        
+        (Updated: <time datetime="2024-04-14T16:00:00.000Z" class="dt-updated" itemprop="dateModified">2024-04-15</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">代码随想录训练营</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="39-组合总和"><a href="#39-组合总和" class="headerlink" title="39. 组合总和"></a>39. 组合总和</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum/">39. 组合总和</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0039.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C.html">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1KT4y1M7HJ/">带你学透回溯算法-组合总和（对应「leetcode」力扣题目：39.组合总和）| 回溯法精讲！</a></p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>与<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combinations/description/">77.组合</a>问题类似，只需定义一个全局变量<code>sum</code>记录当前路径的和，<code>sum</code>等于<code>target</code>时，将该路径添加至结果数组。</p>
+<p>剪枝：对数组进行排序，然后使用回溯算法，当<code>sum</code>大于<code>target</code>时，结束当次循环。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">combinationSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; candidates, <span class="type">int</span> target) &#123;</span><br><span class="line">		result.<span class="built_in">clear</span>();</span><br><span class="line">		path.<span class="built_in">clear</span>();</span><br><span class="line">		<span class="built_in">sort</span>(candidates.<span class="built_in">begin</span>(), candidates.<span class="built_in">end</span>());</span><br><span class="line">		<span class="built_in">backtracking</span>(candidates, target, <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; candidates, <span class="type">int</span> target, <span class="type">int</span> startIndex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">			result.<span class="built_in">push_back</span>(path);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (sum &gt; target)</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; candidates.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">			sum += candidates[i];</span><br><span class="line">			<span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">				sum -= candidates[i];</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			path.<span class="built_in">push_back</span>(candidates[i]);</span><br><span class="line">			<span class="built_in">backtracking</span>(candidates, target, i);</span><br><span class="line">			sum -= candidates[i];</span><br><span class="line">			path.<span class="built_in">pop_back</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="40-组合总和II"><a href="#40-组合总和II" class="headerlink" title="40.组合总和II"></a>40.组合总和II</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-ii/">40.组合总和II</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0040.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12V4y1V73A/">回溯算法中的去重，树层去重树枝去重，你弄清楚了没？| LeetCode:40.组合总和II</a></p>
+</blockquote>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>首先排序数组，然后进行回溯，回溯时需要在横向方向上进行去重，纵向方向不去重。</p>
+<p>定义一个<code>used</code>变量，其中每一位代表数组中对应下标位置的数是否用过，当<code>candidates[i] == candidates[i-1]</code>时，判断<code>used[i-1]</code>是否为0，若为0，表示当前数的前一个数没用过，即横向方向上，跳过此次循环；若为1，表示当前数的前一个数用过，即纵向方向上，不进行去重操作。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">combinationSum2</span>(vector&lt;<span class="type">int</span>&gt; &amp;candidates, <span class="type">int</span> target) &#123;</span><br><span class="line">        used.<span class="built_in">resize</span>(candidates.<span class="built_in">size</span>());</span><br><span class="line">        <span class="built_in">sort</span>(candidates.<span class="built_in">begin</span>(), candidates.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">backtracking</span>(candidates, <span class="number">0</span>, target);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    vector&lt;<span class="type">bool</span>&gt; used;</span><br><span class="line">    <span class="type">int</span> sum;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;candidates, <span class="type">int</span> startIndex, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (sum &gt; target)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; candidates.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; candidates[i] == candidates[i - <span class="number">1</span>] &amp;&amp; used[i - <span class="number">1</span>] == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            used[i] = <span class="number">1</span>;</span><br><span class="line">            sum += candidates[i];</span><br><span class="line">            path.<span class="built_in">push_back</span>(candidates[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(candidates, i + <span class="number">1</span>, target);</span><br><span class="line">            used[i] = <span class="number">0</span>;</span><br><span class="line">            sum -= candidates[i];</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="131-分割回文串"><a href="#131-分割回文串" class="headerlink" title="131.分割回文串"></a>131.分割回文串</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-partitioning/">131.分割回文串</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.html">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1c54y1e7k6/">带你学透回溯算法-分割回文串（对应力扣题目：131.分割回文串）| 回溯法精讲！</a></p>
+</blockquote>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>该题为分割题型，但与组合题型类似，组合题是选择某个下标的元素，而分割题是选择某个下标之前的元素。</p>
+<p>横向方向上，选择不同切割位置；纵向方向上，进行下一次切割。</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">partition</span>(string s) &#123;</span><br><span class="line">        <span class="built_in">backtracking</span>(s, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">judge</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s == <span class="string">&quot;&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = s.<span class="built_in">size</span>() - <span class="number">1</span>; i &lt;= j; i++, j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i] != s[j])</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; result;</span><br><span class="line">    vector&lt;string&gt; path;</span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="type">int</span> sub_len;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(string s, <span class="type">int</span> startIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (sub_len == s.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (len == s.<span class="built_in">size</span>())</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            string sub_s = s.<span class="built_in">substr</span>(startIndex, i - startIndex + <span class="number">1</span>);</span><br><span class="line">            len += sub_s.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">judge</span>(sub_s)) &#123;</span><br><span class="line">                path.<span class="built_in">push_back</span>(sub_s);</span><br><span class="line">                sub_len += sub_s.<span class="built_in">size</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">backtracking</span>(s, i + <span class="number">1</span>);</span><br><span class="line">            len -= sub_s.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">judge</span>(sub_s)) &#123;</span><br><span class="line">                path.<span class="built_in">pop_back</span>();</span><br><span class="line">                sub_len -= sub_s.<span class="built_in">size</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#39-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C"><span class="toc-number">1.</span> <span class="toc-text">39. 组合总和</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#40-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII"><span class="toc-number">2.</span> <span class="toc-text">40.组合总和II</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">131.分割回文串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">3.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&text=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&title=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&is_video=false&description=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串&body=Check out this article: http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&title=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&title=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&title=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&title=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&name=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/04/15/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9_39.%20%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%EF%BC%8C40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII%EF%BC%8C131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/&t=代码随想录算法训练营第二十七天_39. 组合总和，40.组合总和II，131.分割回文串"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Coco
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b627cd33d553ee364518086133d85cf0";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

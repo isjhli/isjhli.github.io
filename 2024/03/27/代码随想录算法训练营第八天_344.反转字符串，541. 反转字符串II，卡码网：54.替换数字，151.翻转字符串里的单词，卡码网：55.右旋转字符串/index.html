@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="344. 反转字符串 题目链接：344. 反转字符串 文档讲解：代码随想录 视频讲解：字符串基础操作！ | LeetCode：344.反转字符串  思路学习了双指针的方法，就能够轻易做出这道题目，定义两个相向双指针，每次交换左右指针的值，即可完成字符串的反转操作。 代码123456789101112class Solution &#123;public:    void reverseString">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串">
+<meta property="og:url" content="http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/index.html">
+<meta property="og:site_name" content="Coco">
+<meta property="og:description" content="344. 反转字符串 题目链接：344. 反转字符串 文档讲解：代码随想录 视频讲解：字符串基础操作！ | LeetCode：344.反转字符串  思路学习了双指针的方法，就能够轻易做出这道题目，定义两个相向双指针，每次交换左右指针的值，即可完成字符串的反转操作。 代码123456789101112class Solution &#123;public:    void reverseString">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-26T16:00:00.000Z">
+<meta property="article:author" content="Coco">
+<meta property="article:tag" content="代码随想录训练营">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWLT1247RV"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DWLT1247RV');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/03/26/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%83%E5%A4%A9_454.%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0II%EF%BC%8C383.%20%E8%B5%8E%E9%87%91%E4%BF%A1%EF%BC%8C15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%8C18.%20%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%8C%E6%80%BB%E7%BB%93/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&text=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&title=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&is_video=false&description=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串&body=Check out this article: http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&title=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&title=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&title=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&title=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&name=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&t=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#344-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.</span> <span class="toc-text">344. 反转字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#541-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2-II"><span class="toc-number">2.</span> <span class="toc-text">541. 反转字符串 II</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"><span class="toc-number">2.3.</span> <span class="toc-text">相关题目</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#54-%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97"><span class="toc-number">3.</span> <span class="toc-text">54. 替换数字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#151-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D"><span class="toc-number">4.</span> <span class="toc-text">151.翻转字符串里的单词</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="toc-number">4.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">4.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#55-%E5%8F%B3%E6%97%8B%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">5.</span> <span class="toc-text">55. 右旋字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-4"><span class="toc-number">5.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-3"><span class="toc-number">5.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">小结</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Coco</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-03-26T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-03-27</time>
+        
+        (Updated: <time datetime="2024-03-26T16:00:00.000Z" class="dt-updated" itemprop="dateModified">2024-03-27</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">代码随想录训练营</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="344-反转字符串"><a href="#344-反转字符串" class="headerlink" title="344. 反转字符串"></a>344. 反转字符串</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/">344. 反转字符串</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fV4y17748/">字符串基础操作！ | LeetCode：344.反转字符串</a></p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>学习了双指针的方法，就能够轻易做出这道题目，定义两个相向双指针，每次交换左右指针的值，即可完成字符串的反转操作。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt; &amp;s)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> right = s.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="built_in">swap</span>(s[left], s[right]);</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="541-反转字符串-II"><a href="#541-反转字符串-II" class="headerlink" title="541. 反转字符串 II"></a>541. 反转字符串 II</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string-ii/description/">541. 反转字符串 II</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0541.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1dT411j7NN/">字符串操作进阶！ | LeetCode：541. 反转字符串II</a></p>
+</blockquote>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p><strong>初始思路：</strong> 定义一个变量<code>count</code>来记录走的次数，遍历字符串，当次数等于2k时，反转前k个字符。跳出循环时若走的次数小于k，则将剩余字符反转，否则反转前k个。该方法的难点在于反转边界的处理。<br><strong>代码随想录思路：</strong> 反转操作的周期是2k，所以循环遍历时，循环变量<code>i</code>每次增加2k，即每隔2k个字符就反转前k个字符。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p><strong>初始思路代码</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">reverseStr</span><span class="params">(string s, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">if</span> (count == <span class="number">2</span> * k) &#123;</span><br><span class="line">                <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>() + i - <span class="number">2</span> * k + <span class="number">1</span>, s.<span class="built_in">begin</span>() + i - k + <span class="number">1</span>);</span><br><span class="line">                count = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (count &lt; k) &#123;</span><br><span class="line">            <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>() + i - count, s.<span class="built_in">begin</span>() + i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (count &gt;= k &amp;&amp; count &lt; <span class="number">2</span> * k) &#123;</span><br><span class="line">            <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>() + i - count, s.<span class="built_in">begin</span>() + i - count + k);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>代码随想录思路代码</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">reverseStr</span><span class="params">(string s, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i += <span class="number">2</span> * k) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i + k &lt;= s.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>() + i, s.<span class="built_in">begin</span>() + i + k);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>() + i, s.<span class="built_in">end</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">26. 删除有序数组中的重复项</a><br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/">283. 移动零</a><br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/backspace-string-compare/">844. 比较含退格的字符串</a><br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/">977. 有序数组的平方</a></p>
+<h1 id="54-替换数字"><a href="#54-替换数字" class="headerlink" title="54. 替换数字"></a>54. 替换数字</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1064">54. 替换数字</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/kama54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>先遍历字符串，统计字符串中出现数字的次数，然后定义一个结果字符串，结果字符串的长度通过原始字符串长度、出现数字的次数以及替换的字符串确定。然后从前向后填充字符即可。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string s;</span><br><span class="line">    string result;</span><br><span class="line">    cin &gt;&gt; s;</span><br><span class="line">    <span class="type">int</span> countNum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : s) &#123;</span><br><span class="line">        <span class="keyword">if</span> (c &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">            countNum++;</span><br><span class="line">    &#125;</span><br><span class="line">    result.<span class="built_in">resize</span>(s.<span class="built_in">size</span>() + countNum * <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] &gt; <span class="string">&#x27;9&#x27;</span> || s[i] &lt; <span class="string">&#x27;0&#x27;</span>) &#123;</span><br><span class="line">            result[j] = s[i];</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            result[j] = <span class="string">&#x27;n&#x27;</span>;</span><br><span class="line">            result[j + <span class="number">1</span>] = <span class="string">&#x27;u&#x27;</span>;</span><br><span class="line">            result[j + <span class="number">2</span>] = <span class="string">&#x27;m&#x27;</span>;</span><br><span class="line">            result[j + <span class="number">3</span>] = <span class="string">&#x27;b&#x27;</span>;</span><br><span class="line">            result[j + <span class="number">4</span>] = <span class="string">&#x27;e&#x27;</span>;</span><br><span class="line">            result[j + <span class="number">5</span>] = <span class="string">&#x27;r&#x27;</span>;</span><br><span class="line">            j += <span class="number">6</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : result)</span><br><span class="line">        cout &lt;&lt; c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h1 id="151-翻转字符串里的单词"><a href="#151-翻转字符串里的单词" class="headerlink" title="151.翻转字符串里的单词"></a>151.翻转字符串里的单词</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-words-in-a-string/description/">151.翻转字符串里的单词</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1uT41177fX/">字符串复杂操作拿捏了！ | LeetCode:151.翻转字符串里的单词</a></p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>跟着代码随想录的思路写出了代码，先通过双指针去除字符串中间以及结尾多余的空格然后反转整个字符串，最后再对每个单词进行反转。</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">reverseWords</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> slow = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> fast = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (fast &lt; s.<span class="built_in">size</span>() &amp;&amp; s[fast] == <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">            fast++;</span><br><span class="line">        <span class="keyword">while</span> (fast &lt; s.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (fast &gt; <span class="number">1</span> &amp;&amp; s[fast] == <span class="string">&#x27; &#x27;</span> &amp;&amp; s[fast - <span class="number">1</span>] == <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">                fast++;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                s[slow] = s[fast];</span><br><span class="line">                slow++;</span><br><span class="line">                fast++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (s[slow - <span class="number">1</span>] == <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">            s.<span class="built_in">resize</span>(slow - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            s.<span class="built_in">resize</span>(slow);</span><br><span class="line"></span><br><span class="line">        s = <span class="built_in">reverseSubStr</span>(s, <span class="number">0</span>, s.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">        slow = <span class="number">0</span>;</span><br><span class="line">        fast = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (fast &lt;= s.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (fast == s.<span class="built_in">size</span>() || s[fast] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">                s = <span class="built_in">reverseSubStr</span>(s, slow, fast - <span class="number">1</span>);</span><br><span class="line">                fast++;</span><br><span class="line">                slow = fast;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                fast++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">reverseSubStr</span><span class="params">(string s, <span class="type">int</span> begin, <span class="type">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> left = begin;</span><br><span class="line">        <span class="type">int</span> right = end;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="built_in">swap</span>(s[left], s[right]);</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="55-右旋字符串"><a href="#55-右旋字符串" class="headerlink" title="55. 右旋字符串"></a>55. 右旋字符串</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1065">55. 右旋字符串</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/kama55.%E5%8F%B3%E6%97%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+<h2 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h2><p>首先反转后k个字符，然后反转剩余字符，最后反转整体字符。如右旋abcdef，k=2</p>
+</blockquote>
+<ol>
+<li>反转后k个字符得到，abcdfe</li>
+<li>反转剩余字符串得到，dcbafe</li>
+<li>反转整体字符串得到，efabcd<h2 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">reverseSubStr</span><span class="params">(string s, <span class="type">int</span> begin, <span class="type">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> left = begin;</span><br><span class="line">    <span class="type">int</span> right = end;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="built_in">swap</span>(s[left], s[right]);</span><br><span class="line">        left++;</span><br><span class="line">        right--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> k;</span><br><span class="line">    string s;</span><br><span class="line">    cin &gt;&gt; k;</span><br><span class="line">    cin &gt;&gt; s;</span><br><span class="line">    s = <span class="built_in">reverseSubStr</span>(s, <span class="number">0</span>, s.<span class="built_in">size</span>() - <span class="number">1</span> - k);</span><br><span class="line">    s = <span class="built_in">reverseSubStr</span>(s, s.<span class="built_in">size</span>() - k, s.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    s = <span class="built_in">reverseSubStr</span>(s, <span class="number">0</span>, s.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : s)</span><br><span class="line">        cout &lt;&lt; c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1>对字符串本身的操作不难，但是难在解决字符串问题的思路。</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#344-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.</span> <span class="toc-text">344. 反转字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#541-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2-II"><span class="toc-number">2.</span> <span class="toc-text">541. 反转字符串 II</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"><span class="toc-number">2.3.</span> <span class="toc-text">相关题目</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#54-%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97"><span class="toc-number">3.</span> <span class="toc-text">54. 替换数字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#151-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D"><span class="toc-number">4.</span> <span class="toc-text">151.翻转字符串里的单词</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="toc-number">4.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">4.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#55-%E5%8F%B3%E6%97%8B%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">5.</span> <span class="toc-text">55. 右旋字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-4"><span class="toc-number">5.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-3"><span class="toc-number">5.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">小结</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&text=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&title=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&is_video=false&description=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串&body=Check out this article: http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&title=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&title=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&title=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&title=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&name=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/&t=代码随想录算法训练营第八天_344.反转字符串，541. 反转字符串II，卡码网：54.替换数字，151.翻转字符串里的单词，卡码网：55.右旋转字符串"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Coco
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b627cd33d553ee364518086133d85cf0";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

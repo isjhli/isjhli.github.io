@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="工程结构12345678├── Lib├── Inc|    └── Utils.h |    └── ORBFeature.h├── Src|    └── Utils.cpp|    └── ORBFeature.cpp├── CMakeLists.cpp 库文件生成123456789101112131415161718192021222324252627282930cmake_minimum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cmake库文件生成与使用">
+<meta property="og:url" content="http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Coco">
+<meta property="og:description" content="工程结构12345678├── Lib├── Inc|    └── Utils.h |    └── ORBFeature.h├── Src|    └── Utils.cpp|    └── ORBFeature.cpp├── CMakeLists.cpp 库文件生成123456789101112131415161718192021222324252627282930cmake_minimum">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-10-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-08T16:00:00.000Z">
+<meta property="article:author" content="Coco">
+<meta property="article:tag" content="cmake">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>cmake库文件生成与使用</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWLT1247RV"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DWLT1247RV');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/01/10/pytorch%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%93%8D%E4%BD%9C%EF%BC%8C%E8%AE%BAfold%E5%92%8Cunfold%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/10/18/slambook2%E5%BA%93%E5%AE%89%E8%A3%85/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&text=cmake库文件生成与使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&title=cmake库文件生成与使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&is_video=false&description=cmake库文件生成与使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cmake库文件生成与使用&body=Check out this article: http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&title=cmake库文件生成与使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&title=cmake库文件生成与使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&title=cmake库文件生成与使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&title=cmake库文件生成与使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&name=cmake库文件生成与使用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&t=cmake库文件生成与使用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">工程结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90"><span class="toc-number">2.</span> <span class="toc-text">库文件生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%93%E6%96%87%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">库文件使用</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        cmake库文件生成与使用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Coco</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-17T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-10-18</time>
+        
+        (Updated: <time datetime="2025-01-08T16:00:00.000Z" class="dt-updated" itemprop="dateModified">2025-01-09</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/cmake/" rel="tag">cmake</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">├── Lib</span><br><span class="line">├── Inc</span><br><span class="line">|    └── Utils.h </span><br><span class="line">|    └── ORBFeature.h</span><br><span class="line">├── Src</span><br><span class="line">|    └── Utils.cpp</span><br><span class="line">|    └── ORBFeature.cpp</span><br><span class="line">├── CMakeLists.cpp</span><br></pre></td></tr></table></figure>
+<h2 id="库文件生成"><a href="#库文件生成" class="headerlink" title="库文件生成"></a>库文件生成</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.24</span>)</span><br><span class="line"><span class="keyword">project</span>(ch7)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 静态库生成路径</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_ARCHIVE_OUTPUT_DIRECTORY <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/Lib)</span><br><span class="line"><span class="comment"># 动态库生成路径</span></span><br><span class="line"><span class="keyword">set</span>(LIBRARY_OUTPUT_DIRECTORY <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/Lib)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 静态库头文件</span></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/Inc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找包</span></span><br><span class="line"><span class="keyword">find_package</span>(OpenCV REQUIRED)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;OpenCV_INCLUDE_DIRS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="string">&quot;/usr/include/eigen3&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(Sophus REQUIRED)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;Sophus_INCLUDE_DIRS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(Pangolin REQUIRED)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;Pangolin_INCLUDE_DIRS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加库文件</span></span><br><span class="line"><span class="keyword">add_library</span>(ORBFeature STATIC Src/ORBFeature.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(ORBFeature <span class="variable">$&#123;OpenCV_LIBS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_library</span>(Utils STATIC Src/Utils.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(Utils <span class="variable">$&#123;OpenCV_LIBS&#125;</span> <span class="variable">$&#123;Pangolin_LIBRARIES&#125;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="库文件使用"><a href="#库文件使用" class="headerlink" title="库文件使用"></a>库文件使用</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.24</span>)</span><br><span class="line"><span class="keyword">project</span>(staticLib)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找包</span></span><br><span class="line"><span class="keyword">find_package</span>(OpenCV REQUIRED)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;OpenCV_INCLUDE_DIRS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="string">&quot;/usr/include/eigen3&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(Sophus REQUIRED)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;Sophus_INCLUDE_DIRS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(Pangolin REQUIRED)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;Pangolin_INCLUDE_DIRS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 静态库头文件路径</span></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/Inc)</span><br><span class="line"><span class="comment"># 静态库路径</span></span><br><span class="line"><span class="keyword">link_directories</span>(<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/Lib)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(pose_estimation_2d2d Src/pose_estimation_2d2d.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(pose_estimation_2d2d <span class="variable">$&#123;OpenCV_LIBS&#125;</span> Sophus::Sophus <span class="variable">$&#123;Pangolin_LIBRARIES&#125;</span> Utils ORBFeature)</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">工程结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90"><span class="toc-number">2.</span> <span class="toc-text">库文件生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%93%E6%96%87%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">库文件使用</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&text=cmake库文件生成与使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&title=cmake库文件生成与使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&is_video=false&description=cmake库文件生成与使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cmake库文件生成与使用&body=Check out this article: http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&title=cmake库文件生成与使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&title=cmake库文件生成与使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&title=cmake库文件生成与使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&title=cmake库文件生成与使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&name=cmake库文件生成与使用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/18/cmake%E5%BA%93%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8/&t=cmake库文件生成与使用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Coco
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b627cd33d553ee364518086133d85cf0";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="332.重新安排行程 题目链接：332.重新安排行程 文档讲解：代码随想录  思路关键是找到一种数据结构存储机票信息，并且能根据目的地的字母顺序进行排序。 因为要将出发地和目的地一一对应，因此可以选择使用map结构存储机票，而一个出发地可能对应着多个目的地，所以unordered_map的键存储出发地，值使用一个map存储目的地，因为map可以对键进行排序，所以可以优先选择字母顺序最小的。在map">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独">
+<meta property="og:url" content="http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/index.html">
+<meta property="og:site_name" content="Coco">
+<meta property="og:description" content="332.重新安排行程 题目链接：332.重新安排行程 文档讲解：代码随想录  思路关键是找到一种数据结构存储机票信息，并且能根据目的地的字母顺序进行排序。 因为要将出发地和目的地一一对应，因此可以选择使用map结构存储机票，而一个出发地可能对应着多个目的地，所以unordered_map的键存储出发地，值使用一个map存储目的地，因为map可以对键进行排序，所以可以优先选择字母顺序最小的。在map">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-17T16:00:00.000Z">
+<meta property="article:author" content="Coco">
+<meta property="article:tag" content="代码随想录训练营">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWLT1247RV"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DWLT1247RV');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/04/21/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E4%BA%8C%E5%A4%A9_122.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAII%EF%BC%8C55.%20%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F%EF%BC%8C45.%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8FII/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/04/17/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B9%9D%E5%A4%A9_491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%8C46.%E5%85%A8%E6%8E%92%E5%88%97%EF%BC%8C47.%E5%85%A8%E6%8E%92%E5%88%97%20II/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&text=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&title=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&is_video=false&description=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独&body=Check out this article: http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&title=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&title=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&title=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&title=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&name=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&t=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#332-%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">332.重新安排行程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#51-N%E7%9A%87%E5%90%8E"><span class="toc-number">2.</span> <span class="toc-text">51. N皇后</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#37-%E8%A7%A3%E6%95%B0%E7%8B%AC"><span class="toc-number">3.</span> <span class="toc-text">37. 解数独</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">3.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Coco</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-04-17T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-04-18</time>
+        
+        (Updated: <time datetime="2024-04-17T16:00:00.000Z" class="dt-updated" itemprop="dateModified">2024-04-18</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">代码随想录训练营</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="332-重新安排行程"><a href="#332-重新安排行程" class="headerlink" title="332.重新安排行程"></a>332.重新安排行程</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reconstruct-itinerary/">332.重新安排行程</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>关键是找到一种数据结构存储机票信息，并且能根据目的地的字母顺序进行排序。</p>
+<p>因为要将出发地和目的地一一对应，因此可以选择使用<code>map</code>结构存储机票，而一个出发地可能对应着多个目的地，所以<code>unordered_map</code>的键存储出发地，值使用一个<code>map</code>存储目的地，因为<code>map</code>可以对键进行排序，所以可以优先选择字母顺序最小的。在<code>map</code>中，键存放目的地，值使用一个<code>int</code>变量存放到达该目的地的航班次数，每到达一次该目的地，次数减一，只有当次数大于0的时候才能到达此目的地，否则会造成两个地点间的循环。</p>
+<p><code>unordered_map&lt;string, map&lt;string, int&gt;&gt;</code></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">findItinerary</span><span class="params">(vector&lt;vector&lt;string&gt;&gt; &amp;tickets)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> vector&lt;string&gt; &amp;vec : tickets)</span><br><span class="line">            targets[vec[<span class="number">0</span>]][vec[<span class="number">1</span>]]++; <span class="comment">// 记录映射关系</span></span><br><span class="line">        vector&lt;string&gt; result;</span><br><span class="line">        result.<span class="built_in">push_back</span>(<span class="string">&quot;JFK&quot;</span>);</span><br><span class="line">        <span class="built_in">backtracking</span>(tickets.<span class="built_in">size</span>(), result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// unordered_map&lt;出发机场, map&lt;到达机场, 航班次数&gt;&gt;</span></span><br><span class="line">    unordered_map&lt;string, map&lt;string, <span class="type">int</span>&gt;&gt; targets;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">backtracking</span><span class="params">(<span class="type">int</span> tickNum, vector&lt;string&gt; &amp;result)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (result.<span class="built_in">size</span>() == tickNum + <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (pair&lt;<span class="type">const</span> string, <span class="type">int</span>&gt; &amp;target : targets[result[result.<span class="built_in">size</span>() - <span class="number">1</span>]]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (target.second &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                result.<span class="built_in">push_back</span>(target.first);</span><br><span class="line">                target.second--;</span><br><span class="line">                <span class="type">bool</span> found = <span class="built_in">backtracking</span>(tickNum, result);</span><br><span class="line">                <span class="keyword">if</span> (found)</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                result.<span class="built_in">pop_back</span>();</span><br><span class="line">                target.second++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="51-N皇后"><a href="#51-N皇后" class="headerlink" title="51. N皇后"></a>51. N皇后</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-queens/description/">51. N皇后</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0051.N%E7%9A%87%E5%90%8E.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rd4y1c7Bq/">这就是传说中的N皇后？ 回溯算法安排！| LeetCode：51.N皇后</a></p>
+</blockquote>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>抽象成树形结构，树的宽度（<code>for</code>循环）代表遍历每列（每行），树的深度（递归）代表遍历每行（每列），如果皇后放置在此处合法，则进行递归回溯，否则跳过当次循环</p>
+<p>判断是否合法，只需要对列和两个斜边进行检查即可。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">solveNQueens</span>(<span class="type">int</span> n) &#123;</span><br><span class="line">        <span class="function">vector&lt;string&gt; <span class="title">chessboard</span><span class="params">(n, string(n, <span class="string">&#x27;.&#x27;</span>))</span></span>;</span><br><span class="line">        <span class="built_in">backtracking</span>(n, <span class="number">0</span>, chessboard);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; result;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> row, vector&lt;string&gt; &amp;chessboard)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (row == n) &#123;</span><br><span class="line">            result.<span class="built_in">push_back</span>(chessboard);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> col = <span class="number">0</span>; col &lt; n; col++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">isValid</span>(row, col, chessboard, n)) &#123;</span><br><span class="line">                chessboard[row][col] = <span class="string">&#x27;Q&#x27;</span>; <span class="comment">// 放置皇后</span></span><br><span class="line">                <span class="built_in">backtracking</span>(n, row + <span class="number">1</span>, chessboard);</span><br><span class="line">                chessboard[row][col] = <span class="string">&#x27;.&#x27;</span>; <span class="comment">// 回溯，撤销皇后</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(<span class="type">int</span> row, <span class="type">int</span> col, vector&lt;string&gt; chessboard, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 检查列</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; row; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (chessboard[i][col] == <span class="string">&#x27;Q&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检查45度</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = row - <span class="number">1</span>, j = col + <span class="number">1</span>; i &gt;= <span class="number">0</span> &amp;&amp; j &lt; n; i--, j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (chessboard[i][j] == <span class="string">&#x27;Q&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检查135度</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = row - <span class="number">1</span>, j = col - <span class="number">1</span>; i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span>; i--, j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (chessboard[i][j] == <span class="string">&#x27;Q&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="37-解数独"><a href="#37-解数独" class="headerlink" title="37. 解数独"></a>37. 解数独</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sudoku-solver/">37. 解数独</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0037.%E8%A7%A3%E6%95%B0%E7%8B%AC.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1TW4y1471V/">回溯算法二维递归？解数独不过如此！| LeetCode：37. 解数独</a></p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>因为要对每个空格子进行1-9的判断，所以要使用两层<code>for</code>循环遍历行和列，递归遍历1-9。</p>
+</blockquote>
+<p>函数需要带有返回值，当找到一种答案时立刻返回。</p>
+<p>注意<code>return false</code>的位置，1-9都判断完后没有符合条件的，则返回<code>false</code>并进行回溯并修改之前确定的值。</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">solveSudoku</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt; &amp;board)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">backtracking</span>(board);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">backtracking</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt; &amp;board)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; board.<span class="built_in">size</span>(); i++) &#123;     <span class="comment">// 遍历行</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; board.<span class="built_in">size</span>(); j++) &#123; <span class="comment">// 遍历列</span></span><br><span class="line">                <span class="keyword">if</span> (board[i][j] != <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">char</span> k = <span class="string">&#x27;1&#x27;</span>; k &lt;= <span class="string">&#x27;9&#x27;</span>; k++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (<span class="built_in">isValid</span>(board, i, j, k)) &#123;</span><br><span class="line">                        board[i][j] = k;</span><br><span class="line">                        <span class="type">bool</span> found = <span class="built_in">backtracking</span>(board);</span><br><span class="line">                        <span class="keyword">if</span> (found)</span><br><span class="line">                            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                        board[i][j] = <span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt; board, <span class="type">int</span> row, <span class="type">int</span> col, <span class="type">char</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 检查行</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; board.<span class="built_in">size</span>(); i++)</span><br><span class="line">            <span class="keyword">if</span> (board[row][i] == num)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检查列</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; board.<span class="built_in">size</span>(); i++)</span><br><span class="line">            <span class="keyword">if</span> (board[i][col] == num)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检查九宫格</span></span><br><span class="line">        <span class="type">int</span> row_grid = row / <span class="number">3</span>;</span><br><span class="line">        <span class="type">int</span> col_grid = col / <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">3</span> * row_grid; i &lt; <span class="number">3</span> * row_grid + <span class="number">3</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">3</span> * col_grid; j &lt; <span class="number">3</span> * col_grid + <span class="number">3</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (board[i][j] == num)</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#332-%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">332.重新安排行程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#51-N%E7%9A%87%E5%90%8E"><span class="toc-number">2.</span> <span class="toc-text">51. N皇后</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#37-%E8%A7%A3%E6%95%B0%E7%8B%AC"><span class="toc-number">3.</span> <span class="toc-text">37. 解数独</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">3.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&text=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&title=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&is_video=false&description=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独&body=Check out this article: http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&title=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&title=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&title=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&title=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&name=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/04/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9_332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B%EF%BC%8C51.%20N%E7%9A%87%E5%90%8E%EF%BC%8C37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC/&t=代码随想录算法训练营第三十天_332.重新安排行程，51. N皇后，37. 解数独"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Coco
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b627cd33d553ee364518086133d85cf0";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

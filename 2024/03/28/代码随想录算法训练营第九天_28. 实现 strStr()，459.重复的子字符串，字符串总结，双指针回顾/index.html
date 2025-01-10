@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="28. 实现 strStr() 题目链接：28. 实现 strStr() 文档讲解：代码随想录 视频讲解：帮你把KMP算法学个通透！（理论篇）、帮你把KMP算法学个通透！（求next数组代码篇）  思路KMP算法是利用前缀表来记录已经匹配过的信息，每次遇到不匹配的情况时，跳回到上次匹配到的地方开始匹配。 第一次写KMP算法，跟着B站视频大体弄明白了算法原理。 代码12345678910111213">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾">
+<meta property="og:url" content="http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/index.html">
+<meta property="og:site_name" content="Coco">
+<meta property="og:description" content="28. 实现 strStr() 题目链接：28. 实现 strStr() 文档讲解：代码随想录 视频讲解：帮你把KMP算法学个通透！（理论篇）、帮你把KMP算法学个通透！（求next数组代码篇）  思路KMP算法是利用前缀表来记录已经匹配过的信息，每次遇到不匹配的情况时，跳回到上次匹配到的地方开始匹配。 第一次写KMP算法，跟着B站视频大体弄明白了算法原理。 代码12345678910111213">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-27T16:00:00.000Z">
+<meta property="article:author" content="Coco">
+<meta property="article:tag" content="代码随想录训练营">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWLT1247RV"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DWLT1247RV');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/03/29/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%8D%81%E5%A4%A9_%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C232.%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97%EF%BC%8C225.%20%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/03/27/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AB%E5%A4%A9_344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C541.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97%EF%BC%8C151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%8C%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55.%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&text=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&title=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&is_video=false&description=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾&body=Check out this article: http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&title=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&title=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&title=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&title=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&name=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&t=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#28-%E5%AE%9E%E7%8E%B0-strStr"><span class="toc-number">1.</span> <span class="toc-text">28. 实现 strStr()</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#459-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.</span> <span class="toc-text">459.重复的子字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">字符串总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE"><span class="toc-number">4.</span> <span class="toc-text">双指针回顾</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Coco</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-03-27T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-03-28</time>
+        
+        (Updated: <time datetime="2024-03-27T16:00:00.000Z" class="dt-updated" itemprop="dateModified">2024-03-28</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">代码随想录训练营</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="28-实现-strStr"><a href="#28-实现-strStr" class="headerlink" title="28. 实现 strStr()"></a>28. 实现 strStr()</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">28. 实现 strStr()</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PD4y1o7nd/">帮你把KMP算法学个通透！（理论篇）</a>、<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1M5411j7Xx/?spm_id_from=333.788&amp;vd_source=258baa6e963bc4b5f07ab85a58c559bd">帮你把KMP算法学个通透！（求next数组代码篇）</a></p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>KMP算法是利用前缀表来记录已经匹配过的信息，每次遇到不匹配的情况时，跳回到上次匹配到的地方开始匹配。</p>
+<p>第一次写KMP算法，跟着B站视频大体弄明白了算法原理。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">strStr</span><span class="params">(string haystack, string needle)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> next[needle.<span class="built_in">size</span>()];</span><br><span class="line">        <span class="built_in">GetNext</span>(next, needle);</span><br><span class="line">        <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; haystack.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; haystack[i] != needle[j])</span><br><span class="line">                j = next[j - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span> (haystack[i] == needle[j])</span><br><span class="line">                j++;</span><br><span class="line">            <span class="keyword">if</span> (j == needle.<span class="built_in">size</span>())</span><br><span class="line">                <span class="keyword">return</span> (i - needle.<span class="built_in">size</span>() + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">GetNext</span><span class="params">(<span class="type">int</span> *next, string s)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">        next[<span class="number">0</span>] = j;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; s[j] != s[i]) &#123;</span><br><span class="line">                j = next[j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (s[j] == s[i])</span><br><span class="line">                j++;</span><br><span class="line">            next[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="459-重复的子字符串"><a href="#459-重复的子字符串" class="headerlink" title="459.重复的子字符串"></a>459.重复的子字符串</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/repeated-substring-pattern/">459. 重复的子字符串</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cg41127fw/">字符串这么玩，可有点难度！ | LeetCode：459.重复的子字符串</a></p>
+</blockquote>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>根据B站视频所讲，由重复子字符串组成的字符串的最大相等前后缀与原字符串相差一个重复的子字符串，而原字符串是由子字符串重复组成，所以子字符串长度一定能整除原字符串长度。</p>
+<p>根据上述思路写出的代码在力扣上可以AC。但是我觉得这种B站只讲了这种思路的必要性，但是没有讲解其充分性。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">repeatedSubstringPattern</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">size</span>() == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="type">int</span> next[s.<span class="built_in">size</span>()];</span><br><span class="line">        <span class="built_in">GetNext</span>(next, s);</span><br><span class="line">        <span class="type">int</span> len = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (next[len - <span class="number">1</span>] != <span class="number">0</span> &amp;&amp; len % (len - next[len - <span class="number">1</span>]) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">GetNext</span><span class="params">(<span class="type">int</span> *next, string s)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">        next[<span class="number">0</span>] = j;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; s[j] != s[i])</span><br><span class="line">                j = next[j - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span> (s[j] == s[i])</span><br><span class="line">                j++;</span><br><span class="line">            next[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="字符串总结"><a href="#字符串总结" class="headerlink" title="字符串总结"></a>字符串总结</h1><p>字符串问题使用最多的方法还是双指针法，不同的只是对双指针的操作，因此双指针法必须熟练掌握。</p>
+<h1 id="双指针回顾"><a href="#双指针回顾" class="headerlink" title="双指针回顾"></a>双指针回顾</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">27. 移除元素</a> 这道题使用快慢指针，快指针指向需要保留的元素，跳过要删除元素，慢指针指向新数组的下标位置，将快指针所指元素赋值到慢指针所指下标位置，完成移除元素操作。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/">344. 反转字符串</a> 这道题使用相向双指针，每次交换左右两个指针所指向的元素即可。</p>
+<p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1064">54. 替换数字</a> 这道题目先求出新字符串的长度，然后使用两个指针分别指向旧字符串的元素和新字符串的下标位置，将旧字符串的字母元素按顺序赋值给新字符串，旧字符串的数字替换为替换值。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-words-in-a-string/">151. 反转字符串中的单词</a>  这道题目使用 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">27. 移除元素</a> 中双指针的思路移除字符串中多余的空格，然后使用 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/">344. 反转字符串</a> 中双指针的思路分别反转整个字符串和每个单词。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">206. 反转链表</a> 这道题目使用双指针分别指向当前反转结点和其前驱结点，每次反转时，使用临时结点记录下反转结点的后继节点，然后改变反转结点的<code>next</code>指针。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">19. 删除链表的倒数第 N 个结点</a> 这道题目使用双指针找出相对尾结点N个的位置，然后使后指针走到链表末尾，前结点即为要删除的结点。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/">面试题 02.07. 链表相交</a> 这道题先求出两个链表的长度，然后使用指针将两个链表进行尾对齐找出对齐后的起始结点，然后遍历后面的结点，找出相交结点。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle-ii/">142. 环形链表 II</a> 这道题首先使用快慢指针判断链表是否有环，若有环则根据数学推导，在快慢指针相遇处设置指针1，在链表起点处设置指针2，然后一起向后走，相遇点就是环的入口。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/">15. 三数之和</a> 先将数组进行升序排序，然后进行遍历，如果当前遍历元素与上一次遍历元素相同，则跳过当次遍历避免重复。遍历时设置左右指针，如果当前元素、左指针元素与右指针元素和小于目标值，则左指针右移，若大于目标值，则右指针左移，若等于目标值则将结果添加至结果数组，并通过<code>while</code>循环将左右指针值完全跳过避免重复。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum/">18. 四数之和</a> 这道题与 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/">15. 三数之和</a> 完全相同，只是遍历时多一层循环。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#28-%E5%AE%9E%E7%8E%B0-strStr"><span class="toc-number">1.</span> <span class="toc-text">28. 实现 strStr()</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#459-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.</span> <span class="toc-text">459.重复的子字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">字符串总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE"><span class="toc-number">4.</span> <span class="toc-text">双指针回顾</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&text=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&title=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&is_video=false&description=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾&body=Check out this article: http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&title=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&title=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&title=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&title=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&name=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/03/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B9%9D%E5%A4%A9_28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%8C459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/&t=代码随想录算法训练营第九天_28. 实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Coco
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b627cd33d553ee364518086133d85cf0";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

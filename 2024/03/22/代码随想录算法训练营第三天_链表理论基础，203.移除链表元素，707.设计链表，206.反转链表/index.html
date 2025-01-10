@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="链表理论基础链表是通过指针将多个结点连接的一种数据结构，每个结点包括数据域和指针域，数据域存储链表数据结构存储的数据，指针域存储下一个结点的地址，这样就避免了使用连续内存，规避了数组的缺点。链表分为单链表、双链表以及循环链表。链表的查找时间复杂度为O(n)，增删时间复杂度为O(1)。 解决链表问题时，通常在链表头结点前添加一个虚拟节点dummyHead以方便操作。 203. 移除链表元素 题目链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表">
+<meta property="og:url" content="http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/index.html">
+<meta property="og:site_name" content="Coco">
+<meta property="og:description" content="链表理论基础链表是通过指针将多个结点连接的一种数据结构，每个结点包括数据域和指针域，数据域存储链表数据结构存储的数据，指针域存储下一个结点的地址，这样就避免了使用连续内存，规避了数组的缺点。链表分为单链表、双链表以及循环链表。链表的查找时间复杂度为O(n)，增删时间复杂度为O(1)。 解决链表问题时，通常在链表头结点前添加一个虚拟节点dummyHead以方便操作。 203. 移除链表元素 题目链接">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-21T16:00:00.000Z">
+<meta property="article:author" content="Coco">
+<meta property="article:tag" content="代码随想录训练营">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWLT1247RV"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DWLT1247RV');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/03/21/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E5%A4%A9_977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%20%EF%BC%8C209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%20%EF%BC%8C59.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II%20%EF%BC%8C%E6%80%BB%E7%BB%93/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&text=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&is_video=false&description=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表&body=Check out this article: http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&name=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&t=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">链表理论基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0"><span class="toc-number">2.</span> <span class="toc-text">203. 移除链表元素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8"><span class="toc-number">3.</span> <span class="toc-text">707. 设计链表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">3.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#206-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8"><span class="toc-number">4.</span> <span class="toc-text">206. 反转链表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">4.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">4.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Coco</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-03-21T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-03-22</time>
+        
+        (Updated: <time datetime="2024-03-21T16:00:00.000Z" class="dt-updated" itemprop="dateModified">2024-03-22</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">代码随想录训练营</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="链表理论基础"><a href="#链表理论基础" class="headerlink" title="链表理论基础"></a>链表理论基础</h1><p>链表是通过指针将多个结点连接的一种数据结构，每个结点包括数据域和指针域，数据域存储链表数据结构存储的数据，指针域存储下一个结点的地址，这样就避免了使用连续内存，规避了数组的缺点。链表分为单链表、双链表以及循环链表。链表的查找时间复杂度为O(n)，增删时间复杂度为O(1)。</p>
+<p>解决链表问题时，通常在链表头结点前添加一个虚拟节点dummyHead以方便操作。</p>
+<h1 id="203-移除链表元素"><a href="#203-移除链表元素" class="headerlink" title="203. 移除链表元素"></a>203. 移除链表元素</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-linked-list-elements/">203. 移除链表元素</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18B4y1s7R9/">手把手带你学会操作链表 | LeetCode：203.移除链表元素</a></p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历链表，定位到需要删除的结点的前驱结点，将前驱结点的next指针指向删除结点的后继结点。为方便删除头结点，在头结点前添加一个虚拟头结点dummyHead。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function">ListNode* <span class="title">removeElements</span><span class="params">(ListNode* head, <span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">		ListNode* dummyHead = <span class="keyword">new</span> <span class="built_in">ListNode</span>();</span><br><span class="line">		dummyHead-&gt;next = head;</span><br><span class="line">		ListNode* p = dummyHead;</span><br><span class="line">		<span class="keyword">while</span> (p-&gt;next) &#123;</span><br><span class="line">			<span class="keyword">if</span> (p-&gt;next-&gt;val == val) &#123;</span><br><span class="line">				p-&gt;next = p-&gt;next-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				p = p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> dummyHead-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在以上操作基础上，还应将被删除结点的内存释放。</p>
+<h1 id="707-设计链表"><a href="#707-设计链表" class="headerlink" title="707. 设计链表"></a>707. 设计链表</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-linked-list/">707. 设计链表</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1FU4y1X7WD/">帮你把链表操作学个通透！LeetCode：707.设计链表</a></p>
+</blockquote>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>按照链表的基本增、删、查操作编写代码，防止出现越界情况，在初始化链表的同时，设置一个变量记录链表长度。注意：链表初始化时，没有头结点，所以初始化应设置为虚拟头结点dummyHead。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyLinkedList</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">MyLinkedList</span>() &#123;</span><br><span class="line">		dummyHead = <span class="keyword">new</span> <span class="built_in">ListNode</span>();</span><br><span class="line">		len = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">get</span><span class="params">(<span class="type">int</span> index)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (index &gt; len - <span class="number">1</span> || index &lt; <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		ListNode* p = dummyHead;</span><br><span class="line">		<span class="keyword">while</span> (index--) &#123;</span><br><span class="line">			p = p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> p-&gt;next-&gt;val;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">addAtHead</span><span class="params">(<span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">		ListNode* temp = <span class="keyword">new</span> <span class="built_in">ListNode</span>(val, dummyHead-&gt;next);</span><br><span class="line">		dummyHead-&gt;next = temp;</span><br><span class="line">		len++;</span><br><span class="line">		<span class="comment">//ListNode* dummyHead = new ListNode();</span></span><br><span class="line">		<span class="comment">//dummyHead-&gt;next = head;</span></span><br><span class="line">		<span class="comment">//ListNode* temp = new ListNode(val, head);</span></span><br><span class="line">		<span class="comment">//dummyHead-&gt;next = temp;</span></span><br><span class="line">		<span class="comment">//head = dummyHead-&gt;next;</span></span><br><span class="line">		<span class="comment">//len++;</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">addAtTail</span><span class="params">(<span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">		ListNode* p = dummyHead;</span><br><span class="line">		<span class="keyword">while</span> (p-&gt;next) &#123;</span><br><span class="line">			p = p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		ListNode* temp = <span class="keyword">new</span> <span class="built_in">ListNode</span>(val);</span><br><span class="line">		p-&gt;next = temp;</span><br><span class="line">		len++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">addAtIndex</span><span class="params">(<span class="type">int</span> index, <span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (index &lt;= len) &#123;</span><br><span class="line">			ListNode* p = dummyHead;</span><br><span class="line">			<span class="keyword">while</span> (index--) &#123;</span><br><span class="line">				p = p-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">			ListNode* temp = <span class="keyword">new</span> <span class="built_in">ListNode</span>(val, p-&gt;next);</span><br><span class="line">			p-&gt;next = temp;</span><br><span class="line">			len++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">deleteAtIndex</span><span class="params">(<span class="type">int</span> index)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (index &gt;= <span class="number">0</span> &amp;&amp; index &lt; len) &#123;</span><br><span class="line">			ListNode* p = dummyHead;</span><br><span class="line">			<span class="keyword">while</span> (index--) &#123;</span><br><span class="line">				p = p-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">			p-&gt;next = p-&gt;next-&gt;next;</span><br><span class="line">			len--;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line">		<span class="type">int</span> val;</span><br><span class="line">		ListNode* next;</span><br><span class="line">		<span class="built_in">ListNode</span>() : <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">next</span>(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">		<span class="built_in">ListNode</span>(<span class="type">int</span> x) :<span class="built_in">val</span>(x), <span class="built_in">next</span>(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">		<span class="built_in">ListNode</span>(<span class="type">int</span> x, ListNode* next) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(next) &#123;&#125;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	ListNode* dummyHead;</span><br><span class="line">	<span class="type">int</span> len;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206. 反转链表"></a>206. 反转链表</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">206. 反转链表</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0206.%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1nB4y1i7eL/">帮你拿下反转链表 | LeetCode：206.反转链表 | 双指针法 | 递归法</a></p>
+</blockquote>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><ul>
+<li><strong>思路一：</strong> 使用双指针，cur指针指向要反转的结点，pre指针指向要反转的结点的前驱结点，因为反转操作会改变cur结点的next指针，因此要使用一个临时结点指向cur结点的后继节点。</li>
+<li><strong>思路二：</strong> 使用递归，函数中只改变cur指针的方向，同时对cur结点和cur的后继节点传入函数进行递归。<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><strong>思路一代码</strong><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head)</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">		ListNode* dummyHead = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>, head);</span><br><span class="line">		ListNode* p = dummyHead;</span><br><span class="line">		ListNode* q = head;</span><br><span class="line">		<span class="keyword">while</span> (q) &#123;</span><br><span class="line">			ListNode* temp = q-&gt;next;</span><br><span class="line">			q-&gt;next = p;</span><br><span class="line">			p = q;</span><br><span class="line">			q = temp;</span><br><span class="line">		&#125;</span><br><span class="line">		head-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">		<span class="keyword">return</span> p;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+编写代码时，反转完成后容易忘记加<code>head-&gt;next = NULL</code>，导致反转后多一个数据域为0的结点。<br><strong>思路二代码</strong><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function">ListNode *<span class="title">reverse</span><span class="params">(ListNode *pre, ListNode *cur)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (!cur)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> pre;</span><br><span class="line">		&#125;</span><br><span class="line">		ListNode *temp = cur-&gt;next;</span><br><span class="line">		cur-&gt;next = pre;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">reverse</span>(cur, temp);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function">ListNode *<span class="title">reverseList</span><span class="params">(ListNode *head)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">reverse</span>(<span class="literal">NULL</span>, head);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+递归的代码不容易理解，在函数内部多打几个断点，观察变量的变化情况。</li>
+</ul>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>处理链表问题最好先加上虚拟头结点dummyHead，这通常会对解题有帮助。</p>
+<p>链表最常用双指针的方法，必须明确每个指针的含义，才能较快写出代码。</p>
+<p>链表中遇到最多的问题就是容易越界，对<code>while</code>的循环条件以及<code>cur-&gt;next</code>和<code>next-&gt;next-&gt;next</code>的操作处理不好。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">链表理论基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0"><span class="toc-number">2.</span> <span class="toc-text">203. 移除链表元素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8"><span class="toc-number">3.</span> <span class="toc-text">707. 设计链表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">3.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#206-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8"><span class="toc-number">4.</span> <span class="toc-text">206. 反转链表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">4.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">4.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&text=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&is_video=false&description=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表&body=Check out this article: http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&name=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&t=代码随想录算法训练营第三天_链表理论基础，203.移除链表元素，707.设计链表，206.反转链表"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Coco
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b627cd33d553ee364518086133d85cf0";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

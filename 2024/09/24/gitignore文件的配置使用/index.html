@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Git 忽略文件的原则 忽略操作系统自动生成的文件，比如略缩图等；  忽略编译生成的中间文件、可执行文件等，比如.log日志文件；  忽略自己的带有敏感信息的文件，比如存放口令的配置文件。   .gitignore 忽略规则的优先级在 .gitignore 文件中，每一行指定一个忽略规则，优先级如下：  从命令行中读取可用的忽略规则 当前目录定义的规则 父级目录定义的规则，依次递推 $GIT_DI">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".gitignore文件的配置使用">
+<meta property="og:url" content="http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Coco">
+<meta property="og:description" content="Git 忽略文件的原则 忽略操作系统自动生成的文件，比如略缩图等；  忽略编译生成的中间文件、可执行文件等，比如.log日志文件；  忽略自己的带有敏感信息的文件，比如存放口令的配置文件。   .gitignore 忽略规则的优先级在 .gitignore 文件中，每一行指定一个忽略规则，优先级如下：  从命令行中读取可用的忽略规则 当前目录定义的规则 父级目录定义的规则，依次递推 $GIT_DI">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-23T16:00:00.000Z">
+<meta property="article:author" content="Coco">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>.gitignore文件的配置使用</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWLT1247RV"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DWLT1247RV');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/09/24/gitignore%E4%BF%9D%E7%95%99%E7%89%B9%E5%AE%9A%E5%90%8E%E7%BC%80%E7%9A%84%E6%96%87%E4%BB%B6%EF%BC%8C%E5%8C%85%E6%8B%AC%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E7%9A%84/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/09/20/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&text=.gitignore文件的配置使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&title=.gitignore文件的配置使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&is_video=false&description=.gitignore文件的配置使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=.gitignore文件的配置使用&body=Check out this article: http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&title=.gitignore文件的配置使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&title=.gitignore文件的配置使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&title=.gitignore文件的配置使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&title=.gitignore文件的配置使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&name=.gitignore文件的配置使用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&t=.gitignore文件的配置使用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E7%9A%84%E5%8E%9F%E5%88%99"><span class="toc-number">1.</span> <span class="toc-text">Git 忽略文件的原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitignore-%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">2.</span> <span class="toc-text">.gitignore 忽略规则的优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitignore-%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E7%9A%84%E5%8C%B9%E9%85%8D%E8%AF%AD%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">.gitignore 忽略规则的匹配语法</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        .gitignore文件的配置使用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Coco</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-09-23T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-09-24</time>
+        
+        (Updated: <time datetime="2024-09-23T16:00:00.000Z" class="dt-updated" itemprop="dateModified">2024-09-24</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/git/" rel="tag">git</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Git-忽略文件的原则"><a href="#Git-忽略文件的原则" class="headerlink" title="Git 忽略文件的原则"></a>Git 忽略文件的原则</h2><ul>
+<li><p>忽略操作系统自动生成的文件，比如略缩图等；</p>
+</li>
+<li><p>忽略编译生成的中间文件、可执行文件等，比如.log日志文件；</p>
+</li>
+<li><p>忽略自己的带有敏感信息的文件，比如存放口令的配置文件。</p>
+</li>
+</ul>
+<h2 id="gitignore-忽略规则的优先级"><a href="#gitignore-忽略规则的优先级" class="headerlink" title=".gitignore 忽略规则的优先级"></a>.gitignore 忽略规则的优先级</h2><p>在 .gitignore 文件中，每一行指定一个忽略规则，优先级如下：</p>
+<ol>
+<li>从命令行中读取可用的忽略规则</li>
+<li>当前目录定义的规则</li>
+<li>父级目录定义的规则，依次递推</li>
+<li><code>$GIT_DIR/info/exclude</code> 文件中定义的规则</li>
+<li><code>core.excludesfile</code> 中定义的全局规则</li>
+</ol>
+<p>在单个.gitignore文件中，匹配由上到下进行。</p>
+<h2 id="gitignore-忽略规则的匹配语法"><a href="#gitignore-忽略规则的匹配语法" class="headerlink" title=".gitignore 忽略规则的匹配语法"></a>.gitignore 忽略规则的匹配语法</h2><p>在 .gitignore 文件中，每一行的忽略规则的语法如下：</p>
+<ol>
+<li>空格不匹配任意文件，可作为分隔符，可用反斜杠转义；</li>
+<li>以<code>#</code>开头的行都会被 Git 忽略，即<code>#</code>开头的为注释；</li>
+<li>以<code>/</code>开头表示目录；</li>
+<li>以<code>/</code>结束表示只匹配文件夹以及该文件夹路径下的内容，但是不匹配该文件；</li>
+<li>以<code>*</code>表示通配多个字符，即匹配多个任意字符；</li>
+<li>以<code>**</code>表示匹配任意中间目录，比如<code>a/**/z</code>可以匹配<code>a/z</code>，<code>a/b/z</code>或<code>a/b/c/z</code>等；</li>
+<li>以<code>?</code>表示通配单个字符，即匹配一个任意字符；</li>
+<li>以<code>[]</code>表示包含单个字符的匹配列表，即匹配任何一个列在方括号中的字符。如<code>[abc]</code>表示匹配<code>a</code>或<code>b</code>或<code>c</code>；</li>
+<li>以<code>!</code>表示不忽略（跟踪）匹配到的文件或目录，即要忽略指定模式以外的文件或目录。注意：如果一个文件的父目录已经被前面的规则忽略掉了，那么对这个文件用<code>!</code>规则无效。</li>
+</ol>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 表示次为注释，将被 Git 忽略</span></span><br><span class="line">*.a <span class="comment"># 表示忽略所有 .a 结尾的文件</span></span><br><span class="line">!lib.a <span class="comment"># 表示 lib.a 除外</span></span><br><span class="line">/TODO <span class="comment"># 表示仅仅忽略项目根目录下的 TODO 文件，不包括子目录下的如 subdir/TODO</span></span><br><span class="line">build/ <span class="comment"># 表示忽略 build/ 目录下的所有文件，过滤整个 build 文件夹</span></span><br><span class="line">doc/*.txt <span class="comment"># 表示忽略 doc 目录下以 .txt 结尾的所有文件，但不包括 doc/server/arch.txt</span></span><br><span class="line"></span><br><span class="line">bin/ <span class="comment"># 表示忽略当前路径下的 bin 文件夹，该文件夹下的所有内容都会被忽略，不忽略 bin文件</span></span><br><span class="line">/bin <span class="comment"># 表示忽略根目录下的 bin 文件</span></span><br><span class="line">/*.c <span class="comment"># 表示忽略 cat.c，不忽略 build/cat.c</span></span><br><span class="line">debug/*.obj <span class="comment"># 表示忽略 debug/io.obj，不忽略 debug/common/io.obj</span></span><br><span class="line">**/foo <span class="comment"># 表示忽略 /foo，a/foo，a/b/foo 等</span></span><br><span class="line">a/**/b <span class="comment"># 表示忽略 a/b, a/x/b，a/x/y/b 等</span></span><br><span class="line">!/bin/run.sh <span class="comment"># 表示不忽略 bin 目录下的 run.sh 文件</span></span><br><span class="line">*.<span class="built_in">log</span> <span class="comment"># 表示忽略所有 .log 文件</span></span><br><span class="line">config.php <span class="comment"># 表示忽略当前路径的 config.php 文件</span></span><br></pre></td></tr></table></figure>
+<p>还有一些规则：</p>
+<ol>
+<li><code>fd1/*</code> 表示忽略目录 fd1 下的全部内容，不管是根目录下的 fd1 目录，还是某个子目录 /child/fd1/ 目录，都会被忽略；</li>
+<li><code>/fd1/*</code> 表示忽略根目录下的 fd1 目录的全部内容。</li>
+</ol>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">!.gitignore</span><br><span class="line">!/fw/</span><br><span class="line">/fw/*</span><br><span class="line">!/fw/bin/</span><br><span class="line">!/fw/sf/</span><br><span class="line"><span class="comment"># 表示：忽略全部内容 ，但是不忽略 .gitignore 文件、根目录下的 /fw/bin/ 和 /fw/sf/ 目录；</span></span><br><span class="line"><span class="comment"># 注意：要先对 bin/ 的父目录使用 ! 规则，使其不被排除</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E7%9A%84%E5%8E%9F%E5%88%99"><span class="toc-number">1.</span> <span class="toc-text">Git 忽略文件的原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitignore-%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">2.</span> <span class="toc-text">.gitignore 忽略规则的优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitignore-%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E7%9A%84%E5%8C%B9%E9%85%8D%E8%AF%AD%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">.gitignore 忽略规则的匹配语法</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&text=.gitignore文件的配置使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&title=.gitignore文件的配置使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&is_video=false&description=.gitignore文件的配置使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=.gitignore文件的配置使用&body=Check out this article: http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&title=.gitignore文件的配置使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&title=.gitignore文件的配置使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&title=.gitignore文件的配置使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&title=.gitignore文件的配置使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&name=.gitignore文件的配置使用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/09/24/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/&t=.gitignore文件的配置使用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Coco
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b627cd33d553ee364518086133d85cf0";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

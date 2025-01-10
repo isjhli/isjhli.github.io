@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="198.打家劫舍 题目链接：198.打家劫舍 文档讲解：代码随想录 视频讲解：动态规划，偷不偷这个房间呢？| LeetCode：198.打家劫舍  思路dp数组：dp[i]表示考虑下标i（包括i）以内的房屋，最多可以偷dp[i]。 递推公式：dp[i] &#x3D; max(dp[i - 1], dp[i - 2] + nums[i])，不偷房间i，则金额为dp[i - 1]，偷房间i，则金额为dp[i -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III">
+<meta property="og:url" content="http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/index.html">
+<meta property="og:site_name" content="Coco">
+<meta property="og:description" content="198.打家劫舍 题目链接：198.打家劫舍 文档讲解：代码随想录 视频讲解：动态规划，偷不偷这个房间呢？| LeetCode：198.打家劫舍  思路dp数组：dp[i]表示考虑下标i（包括i）以内的房屋，最多可以偷dp[i]。 递推公式：dp[i] &#x3D; max(dp[i - 1], dp[i - 2] + nums[i])，不偷房间i，则金额为dp[i - 1]，偷房间i，则金额为dp[i -">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-05-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-11T16:00:00.000Z">
+<meta property="article:author" content="Coco">
+<meta property="article:tag" content="代码随想录训练营">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWLT1247RV"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DWLT1247RV');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%94%E5%8D%81%E5%A4%A9_309.%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%BA%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F%EF%BC%8C714.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B9%9D%E5%A4%A9_123.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAIII%EF%BC%8C188.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAIV/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&text=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&title=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&is_video=false&description=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III&body=Check out this article: http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&title=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&title=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&title=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&title=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&name=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&t=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#198-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D"><span class="toc-number">1.</span> <span class="toc-text">198.打家劫舍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#213-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII"><span class="toc-number">2.</span> <span class="toc-text">213.打家劫舍II</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#337-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII"><span class="toc-number">3.</span> <span class="toc-text">337.打家劫舍III</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">3.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Coco</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-05-11T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-05-12</time>
+        
+        (Updated: <time datetime="2024-05-11T16:00:00.000Z" class="dt-updated" itemprop="dateModified">2024-05-12</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">代码随想录训练营</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="198-打家劫舍"><a href="#198-打家劫舍" class="headerlink" title="198.打家劫舍"></a>198.打家劫舍</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber/">198.打家劫舍</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Te411N7SX/">动态规划，偷不偷这个房间呢？| LeetCode：198.打家劫舍</a></p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>dp数组：dp[i]表示考虑下标i（包括i）以内的房屋，最多可以偷dp[i]。</p>
+<p>递推公式：dp[i] = max(dp[i - 1], dp[i - 2] + nums[i])，不偷房间i，则金额为dp[i - 1]，偷房间i，则金额为dp[i - 2] + nums[i]，两者中取最大值。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(nums.size(), <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>], dp[i - <span class="number">2</span>] + nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[nums.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="213-打家劫舍II"><a href="#213-打家劫舍II" class="headerlink" title="213.打家劫舍II"></a>213.打家劫舍II</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-ii/">213.打家劫舍II</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1oM411B7xq/">动态规划，房间连成环了那还偷不偷呢？| LeetCode：213.打家劫舍II</a></p>
+</blockquote>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>与上一题类似，只需要分别考虑偷不偷首位的房间：</p>
+<ul>
+<li>不偷尾房间：只需要将不包含尾房间的数组放入上一题中计算。</li>
+<li>不偷首房间：只需要将不包含首房间的数组放入上一题中计算。</li>
+</ul>
+<p>两者取最大值。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">        <span class="type">int</span> result1 = <span class="built_in">robRange</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">        <span class="type">int</span> result2 = <span class="built_in">robRange</span>(nums, <span class="number">1</span>, nums.<span class="built_in">size</span>());</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(result1, result2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">robRange</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>&#123; <span class="comment">// 左闭又开</span></span><br><span class="line">        <span class="keyword">if</span> (end - start == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> nums[start];</span><br><span class="line">        <span class="keyword">if</span> (end - start == <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">max</span>(nums[start], nums[start + <span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(nums.size(), <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[start] = nums[start];</span><br><span class="line">        dp[start + <span class="number">1</span>] = <span class="built_in">max</span>(nums[start], nums[start + <span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start + <span class="number">2</span>; i &lt; end; i++) &#123;</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>], dp[i - <span class="number">2</span>] + nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[end - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="337-打家劫舍III"><a href="#337-打家劫舍III" class="headerlink" title="337.打家劫舍III"></a>337.打家劫舍III</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-iii/">337.打家劫舍III</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1H24y1Q7sY/">动态规划，房间连成树了，偷不偷呢？| LeetCode：337.打家劫舍3</a></p>
+</blockquote>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>采用后序遍历，先得到左右子树的状态，然后再考虑当前结点是否偷取。</p>
+<p>后序遍历返回值返回一个长度为2的数组，数组元素0代表不偷该结点所得到的最大金额，数组元素1代表偷该结点所得到的最大金额。</p>
+<p>对于中间结点的处理，如果偷中间结点，则最大金额为中间结点金额 + 不偷左结点最大金额 + 不偷右节点最大金额，如果不偷中间结点，则最大金额为左右结点偷或不偷的最大金额和。</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(TreeNode *root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; result = <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(result[<span class="number">0</span>], result[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 返回值：偷与不偷两种状态的金钱数</span></span><br><span class="line">    <span class="comment">// 下标0表示不偷当前结点，下标1表示偷当前结点</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">traversal</span><span class="params">(TreeNode *node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> vector&lt;<span class="type">int</span>&gt;&#123;<span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; left = <span class="built_in">traversal</span>(node-&gt;left);</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; right = <span class="built_in">traversal</span>(node-&gt;right);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 没有偷左右结点，偷当前结点</span></span><br><span class="line">        <span class="type">int</span> val1 = node-&gt;val + left[<span class="number">0</span>] + right[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// 偷左右结点，不偷当前结点</span></span><br><span class="line">        <span class="type">int</span> val2 = <span class="built_in">max</span>(left[<span class="number">0</span>], left[<span class="number">1</span>]) + <span class="built_in">max</span>(right[<span class="number">0</span>], right[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">return</span> &#123;val2, val1&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#198-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D"><span class="toc-number">1.</span> <span class="toc-text">198.打家劫舍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#213-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII"><span class="toc-number">2.</span> <span class="toc-text">213.打家劫舍II</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#337-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII"><span class="toc-number">3.</span> <span class="toc-text">337.打家劫舍III</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">3.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&text=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&title=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&is_video=false&description=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III&body=Check out this article: http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&title=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&title=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&title=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&title=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&name=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/05/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%A4%A9_198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%EF%BC%8C213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII%EF%BC%8C337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/&t=代码随想录算法训练营第四十七天_198.打家劫舍，213.打家劫舍II，337.打家劫舍III"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Coco
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b627cd33d553ee364518086133d85cf0";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

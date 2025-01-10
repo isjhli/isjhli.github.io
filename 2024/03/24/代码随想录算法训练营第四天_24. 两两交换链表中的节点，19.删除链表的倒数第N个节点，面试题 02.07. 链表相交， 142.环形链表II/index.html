@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="24. 两两交换链表中的节点 题目链接：24. 两两交换链表中的节点 文档讲解：代码随想录 视频讲解：帮你把链表细节学清楚！ | LeetCode：24. 两两交换链表中的节点  思路首先为便于处理头结点，设置一个虚拟头结点dummyHead。设置一个cur指针指向需要交换结点的前驱结点，当cur-&gt;next和cur-&gt;next-&gt;next都存在时说明后续两个结点需要交换，此时利">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II">
+<meta property="og:url" content="http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/index.html">
+<meta property="og:site_name" content="Coco">
+<meta property="og:description" content="24. 两两交换链表中的节点 题目链接：24. 两两交换链表中的节点 文档讲解：代码随想录 视频讲解：帮你把链表细节学清楚！ | LeetCode：24. 两两交换链表中的节点  思路首先为便于处理头结点，设置一个虚拟头结点dummyHead。设置一个cur指针指向需要交换结点的前驱结点，当cur-&gt;next和cur-&gt;next-&gt;next都存在时说明后续两个结点需要交换，此时利">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/e07206dbf7020a205886ec9ea99828ba.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/9511ca6e62be443a0f02f7a80abf8ce7.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/7f465636b5849e630b188b6d22cf0c96.png">
+<meta property="article:published_time" content="2024-03-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-23T16:00:00.000Z">
+<meta property="article:author" content="Coco">
+<meta property="article:tag" content="代码随想录训练营">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i-blog.csdnimg.cn/blog_migrate/e07206dbf7020a205886ec9ea99828ba.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWLT1247RV"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DWLT1247RV');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/03/25/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%85%AD%E5%A4%A9_%E5%93%88%E5%B8%8C%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C242.%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%EF%BC%8C349.%20%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86%EF%BC%8C202.%20%E5%BF%AB%E4%B9%90%E6%95%B0%EF%BC%8C1.%20%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/03/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9_%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%EF%BC%8C203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%8C206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&text=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&title=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&is_video=false&description=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II&body=Check out this article: http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&title=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&title=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&title=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&title=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&name=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&t=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">24. 两两交换链表中的节点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">19. 删除链表的倒数第N个节点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"><span class="toc-number">2.3.</span> <span class="toc-text">相关题目</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98-02-07-%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4"><span class="toc-number">3.</span> <span class="toc-text">面试题 02.07. 链表相交</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II"><span class="toc-number">4.</span> <span class="toc-text">142. 环形链表II</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="toc-number">4.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">4.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Coco</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-03-23T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-03-24</time>
+        
+        (Updated: <time datetime="2024-03-23T16:00:00.000Z" class="dt-updated" itemprop="dateModified">2024-03-24</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">代码随想录训练营</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24. 两两交换链表中的节点"></a>24. 两两交换链表中的节点</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/swap-nodes-in-pairs/description/">24. 两两交换链表中的节点</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0024.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.html">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YT411g7br/">帮你把链表细节学清楚！ | LeetCode：24. 两两交换链表中的节点</a></p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先为便于处理头结点，设置一个虚拟头结点dummyHead。设置一个<code>cur</code>指针指向需要交换结点的前驱结点，当<code>cur-&gt;next</code>和<code>cur-&gt;next-&gt;next</code>都存在时说明后续两个结点需要交换，此时利用临时结点变量记录好结点后，完成交换操作。<br><img src="https://i-blog.csdnimg.cn/blog_migrate/e07206dbf7020a205886ec9ea99828ba.png" alt="交换结点操作"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">swapPairs</span><span class="params">(ListNode *head)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ListNode *dummyHead = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>, head);</span><br><span class="line">        ListNode* cur = dummyHead;</span><br><span class="line">        <span class="keyword">while</span> (cur-&gt;next &amp;&amp; cur-&gt;next-&gt;next)</span><br><span class="line">        &#123;</span><br><span class="line">            ListNode* temp1 = cur-&gt;next;</span><br><span class="line">            ListNode* temp2 = cur-&gt;next-&gt;next-&gt;next;</span><br><span class="line">            cur-&gt;next = temp1-&gt;next;</span><br><span class="line">            cur-&gt;next-&gt;next = temp1;</span><br><span class="line">            temp1-&gt;next = temp2;</span><br><span class="line">            cur = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummyHead-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="19-删除链表的倒数第N个节点"><a href="#19-删除链表的倒数第N个节点" class="headerlink" title="19. 删除链表的倒数第N个节点"></a>19. 删除链表的倒数第N个节点</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/">19. 删除链表的倒数第 N 个结点</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0019.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vW4y1U7Gf/">链表遍历学清楚！ | LeetCode：19.删除链表倒数第N个节点</a></p>
+</blockquote>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>删除链表的结点时，需要知道所删除结点的位置，若知道所删除结点据头结点head的位置，则一次遍历至所删除结点的前驱结点，然后完成删除操作；若直到所删除结点据尾结点的位置N，则可以通过两个相距N的指针，将后指针指向尾结点，则前指针指向所删除结点的前驱结点，然后完成删除操作。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">removeNthFromEnd</span><span class="params">(ListNode *head, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ListNode *dummyHead = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>, head);</span><br><span class="line">        ListNode *pre = dummyHead;</span><br><span class="line">        ListNode *cur = dummyHead-&gt;next;</span><br><span class="line">        ListNode *beh = cur;</span><br><span class="line">        n--;</span><br><span class="line">        <span class="keyword">while</span> (n--)</span><br><span class="line">        &#123;</span><br><span class="line">            beh = beh-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (beh-&gt;next)</span><br><span class="line">        &#123;</span><br><span class="line">            pre = pre-&gt;next;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">            beh = beh-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *temp = cur;</span><br><span class="line">        pre-&gt;next = cur-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> temp;</span><br><span class="line">        <span class="keyword">return</span> dummyHead-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">26. 删除有序数组中的重复项</a><br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/">283. 移动零</a><br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/backspace-string-compare/">844. 比较含退格的字符串</a><br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/">977. 有序数组的平方</a></p>
+<h1 id="面试题-02-07-链表相交"><a href="#面试题-02-07-链表相交" class="headerlink" title="面试题 02.07. 链表相交"></a>面试题 02.07. 链表相交</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/">面试题 02.07. 链表相交</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/%E9%9D%A2%E8%AF%95%E9%A2%9802.07.%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>两个链表相交指的是两个链表的结点地址相同，而不是值相同，如下图中实际相交结点为8，而不是1。</p>
+</blockquote>
+<p>链表相交的思路是设置两个指针分别指向两个链表相交结点前的相同位置，如下图中的4和0，这样让两个指针分别向后走，即可找到相交结点。</p>
+<p>所以首先要求出链表B的0位置，链表B和链表A的长度差就是链表B的0相对于head结点的位置，因此可以先分别遍历两个链表，求出两个链表的长度差l，然后设置一个结点指向链表B的头结点，向后走l个，这样链表A和链表B的结点就对齐了。</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/9511ca6e62be443a0f02f7a80abf8ce7.png" alt="链表相交"><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">getIntersectionNode</span><span class="params">(ListNode *headA, ListNode *headB)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> len1 = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> len2 = <span class="number">0</span>;</span><br><span class="line">        ListNode *dummyHead1 = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>, headA);</span><br><span class="line">        ListNode *dummyHead2 = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>, headB);</span><br><span class="line">        ListNode *p = dummyHead1;</span><br><span class="line">        <span class="keyword">while</span> (p-&gt;next)</span><br><span class="line">        &#123;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">            len1++;</span><br><span class="line">        &#125;</span><br><span class="line">        p = dummyHead2;</span><br><span class="line">        <span class="keyword">while</span> (p-&gt;next)</span><br><span class="line">        &#123;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">            len2++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (len1 &lt; len2)</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">getIntersectionNode</span>(headB, headA);</span><br><span class="line">        <span class="type">int</span> gap = len1 - len2;</span><br><span class="line">        p = headA;</span><br><span class="line">        ListNode *q = headB;</span><br><span class="line">        <span class="keyword">while</span> (gap--)</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (p &amp;&amp; q &amp;&amp; p != q)</span><br><span class="line">        &#123;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">            q = q-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (p &amp;&amp; q &amp;&amp; p == q)</span><br><span class="line">            <span class="keyword">return</span> p;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h1 id="142-环形链表II"><a href="#142-环形链表II" class="headerlink" title="142. 环形链表II"></a>142. 环形链表II</h1><blockquote>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle-ii/description/">142. 环形链表 II</a></p>
+<p>文档讲解：<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a><br>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1if4y1d7ob/?vd_source=258baa6e963bc4b5f07ab85a58c559bd">把环形链表讲清楚！ 如何判断环形链表？如何找到环形链表的入口？ LeetCode：142.环形链表II</a></p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>首先要判断该链表是否有环，然后再找到环的入口。</p>
+</blockquote>
+<p>使用快慢双指针法，慢指针一次走一个结点，快指针一次走两个结点，如果快慢指针相遇（即指向同一结点），则该链表有环，否则链表没有环。</p>
+<p>当链表有环时，找到该环的入口是这道题的难点，需要推导一下。</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/7f465636b5849e630b188b6d22cf0c96.png" alt="推到环入口"><br>如上图，假设链表的头结点至环入口的结点数为$x$，环入口至快慢指针相遇点的结点数为$y$，快慢指针相遇点至环入口的结点数为$z$。</p>
+<p>则快慢指针相遇时，慢指针走了$x+y$个结点，快指针走了$x+y+n(y+z)$个结点，其中$n$代表圈数。</p>
+<p>因为快指针的速度是满指针的两倍，故有<script type="math/tex">x+y+n(y+z) = 2(x+y)</script></p>
+<p>整理得到<script type="math/tex">x=z+(n-1)(y+z)</script></p>
+<p>上式表示，环入口至头结点的距离$x$等于$(n-1)$圈环加快慢指针相遇点至环入口的结点数。</p>
+<p>因此设置一个指针1指向头结点，一个指针2指向快慢指针相遇点，两个指针同步向后走，指针2在环中绕$n-1$圈后再走$z$个结点就与指针1在环入口相遇。</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head || !head-&gt;next)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *start = head;</span><br><span class="line">        <span class="keyword">while</span> (fast &amp;&amp; fast-&gt;next)</span><br><span class="line">        &#123;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            <span class="keyword">if</span> (slow == fast)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (fast == slow)</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (fast != start)</span><br><span class="line">            &#123;</span><br><span class="line">                start = start-&gt;next;</span><br><span class="line">                fast = fast-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> start;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>算法训练营中关于链表的问题今天就结束了。链表问题最常用的方法是双指针法，必须要明确两个指针的含义，同时要处理好指针的边界。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">24. 两两交换链表中的节点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">19. 删除链表的倒数第N个节点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"><span class="toc-number">2.3.</span> <span class="toc-text">相关题目</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98-02-07-%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4"><span class="toc-number">3.</span> <span class="toc-text">面试题 02.07. 链表相交</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.1.</span> <span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II"><span class="toc-number">4.</span> <span class="toc-text">142. 环形链表II</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="toc-number">4.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">4.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&text=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&title=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&is_video=false&description=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II&body=Check out this article: http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&title=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&title=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&title=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&title=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&name=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/03/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9_24.%20%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%8C19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E9%9D%A2%E8%AF%95%E9%A2%98%2002.07.%20%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%EF%BC%8C%20142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/&t=代码随想录算法训练营第四天_24. 两两交换链表中的节点，19.删除链表的倒数第N个节点，面试题 02.07. 链表相交， 142.环形链表II"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Coco
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/isjhli/isjhli.github.io">Projects</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b627cd33d553ee364518086133d85cf0";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
